@@ -62,5 +62,21 @@ __15:30: pushed local repo rustvr-gl-gfx to github__
   * `git remote add origin https://github.com/RustVR/rustvr-gl-gfx.git`
   * `git push -u origin master`
 
+-------------------------
+### 2017.05.16 c4augustus
+
+__15:20: created github repo rustvr-hi-ovr-mobile__
+  * firefox: `https://github/organizations/RustVR`
+  * [New Repository]
+  * Repository name: `rustvr-hi-ovr-mobile`
+  * Description: `RustVR plugin for its human interface using the Oculus Mobile SDK`
+  * `X` Public (default)
+  * ` ` Initialize this repository with a README
+
+__15:30: pushed local repo rustvr-hi-ovr-mobile to github__
+  * `cd rustvr/repo/rustvr-hi-ovr-mobile`
+  * `git remote add origin https://github.com/rustvr/rustvr-hi-ovr-mobile.git`
+  * `git push -u origin master`
+
 -----------------
 ### (end of file)
