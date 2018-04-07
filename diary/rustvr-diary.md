@@ -78,5 +78,12 @@ __15:30: pushed local repo rustvr-hi-ovr-mobile to github__
   * `git remote add origin https://github.com/rustvr/rustvr-hi-ovr-mobile.git`
   * `git push -u origin master`
 
+-------------------------
+### 2018.01.16 c4augustus
+
+__11:38: upgraded local rust installation from 1.20.0 to 1.23.0__
+  * `cd ~/u/run/rust`
+  * `./curl-rustup`
+
 -----------------
 ### (end of file)
