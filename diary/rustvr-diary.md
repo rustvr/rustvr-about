@@ -2,6 +2,154 @@ Diary of Rust VR
 ================
 
 -------------------------
+### 2016.08.21 c4augustus
+
+__19:00: created local crates.io index to support offline programming__
+  * `cd ~/v/dev/copyleft/group/c4a/repo`
+  * `git clone --bare https://github.com/rust-lang/crates.io-index.git`
+  * created and added to `~/v/dev/copyleft/group/.cargo/config`
+    __@@@ BUT COMMENTED IT OUT BECAUSE IT REQUIRES ALL SOURCE TO BE LOCAL__
+~~~
+  #[registry]
+  #index = "file:///Users/?????/v/dev/copyleft/group/c4a/repo/crates.io-index.git"
+~~~
+
+-------------------------
+### 2016.09.03 c4augustus
+
+__21:00: cloned gfx-rs/gfx and configured for glutin instead of glfw__
+  * `cd rustvr/repo`
+  * `git clone https://github.com/gfx-rs/gfx.git`
+
+__21:30: upgraded rust from 1.9 to 1.11__
+
+__22:30: built gfx__
+  * `cd rustvr/repo/gfx`
+  * `cargo clean`
+  * `cargo run --example cube`
+    #### @@@ FAILED:
+~~~
+   Compiling gfx_device_metal v0.1.0 (file:///Users/?????/v/dev/copyleft/rustvr/repo/gfx/src/backend/metal)
+src/backend/metal/src/command.rs:25:5: 25:27 error: unresolved import `gfx_core::shade::Stage`. Maybe a missing `extern crate gfx_core`? [E0432]
+src/backend/metal/src/command.rs:25 use gfx_core::shade::Stage;
+~~~
+  * `git checkout v0.12`
+  * `cargo clean`
+  * `cargo build`
+  * `cargo run --example code`
+    #### !!! SUCCESS
+
+__24:00: started copying gfx example source: terrain__
+  * copied `gfx/examples/terrain/main.rs` to `??????/src/main.rs`
+  * copied `gfx/examples/terrain/data/` to `??????/src/data/`
+  * copied `gfx/examples/terrain/shader/` to `??????/src/shader/`
+  * edited `Cargo.toml`, extracted what's needed from `gfx/Cargo.toml`
+  * `cargo clean`
+  * `cargo build`
+  * `cargo run`
+    #### !!! SUCCESS
+
+-------------------------
+### 2016.09.12 c4augustus
+
+__13:00: cloned Valve's OpenVR__
+  * `cd rustvr/repo/_consider`
+  * `git clone https://github.com/ValveSoftware/openvr.git`
+
+__13:30: configure and built openvr-rs__
+  * `cd rustvr/repo/_consider/openvr-rs`
+  * `cargo build`
+  * `cd example`
+  * `vim build.rs`
+    + changed win64 `dll` filenames to osx32 `dynlib`
+  * `vim src/lib.rs`
+    + changed win64 `dll` filenames to osx32 `dynlib`
+  * `cargo run`
+    #### @@@ FAILED BECAUSE OPENVR WON'T WORK ON MAC:
+~~~
+  thread 'main' panicked at 'OpenVR init: Init_PathRegistryNotFound', ../src/libcore/result.rs:788
+~~~
+  * `RUST_BACKTRACE=1 cargo run`
+
+__14:00: cloned rust-openvr__
+  * `cd rustvr/repo/_consider`
+  * `git clone https://github.com/rust-openvr/rust-openvr.git`
+  * `cd rust-openvr`
+  * `cargo run --example camera`
+    #### @@@ FAILED BECAUSE OPENVR WON'T WORK ON MAC:
+~~~
+  Failed to create IVRSystem subsystem Error { raw: EVRInitError_VRInitError_Init_PathRegistryNotFound }
+~~~
+
+__14:30: attempted to build libovr-rs__
+  * `cd rustvr/repo/_consider/openvr-rs`
+  * `cargo build`
+    #### @@@ FAILED BECAUSE IT ONLY BUILDS ON WINDOWS
+~~~
+  error: main function not found
+~~~
+
+__14:30: attempted to build rovr__
+  * `cd rustvr/repo/_consider/rovr`
+  * `cargo build`
+    #### @@@ FAILED BECAUSE ITS RUST SOURCE IS OUT OF DATE
+~~~
+/Users/?????/.cargo/registry/src/github.com-1ecc6299db9ec823/gl_generator-0.0.26/registry.rs:30:5: 30:40 error: module `events` is private
+/Users/?????/.cargo/registry/src/github.com-1ecc6299db9ec823/gl_generator-0.0.26/registry.rs:30 use self::xml::reader::events::XmlEvent;
+                                                                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/?????/.cargo/registry/src/github.com-1ecc6299db9ec823/gl_generator-0.0.26/registry.rs:322:45: 322:51 error: no method named `events` found for type `std::cell::RefMut<'_, registry::xml::EventReader<R>>` in the current scope
+/Users/?????/.cargo/registry/src/github.com-1ecc6299db9ec823/gl_generator-0.0.26/registry.rs:322         for event in self.port.borrow_mut().events() {
+                                                                                                                                             ^~~~~~
+/Users/?????/.cargo/registry/src/github.com-1ecc6299db9ec823/gl_generator-0.0.26/registry.rs:328:17: 328:37 error: no associated item named `Error` found for type `registry::xml::reader::XmlEvent` in the current scope
+/Users/?????/.cargo/registry/src/github.com-1ecc6299db9ec823/gl_generator-0.0.26/registry.rs:328                 XmlEvent::Error(err) => panic!("XML error: {:?}", err),
+                                                                                                                 ^~~~~~~~~~~~~~~~~~~~
+error: aborting due to 2 previous errors
+Build failed, waiting for other jobs to finish...
+error: Could not compile `gl_generator`.
+~~~
+
+-------------------------
+### 2016.09.13 c4augustus
+
+__11:00: setup Oculus mobile SDK on OS X__
+  * downloaded Oculus mobile SDK 1.0.3 into `/u/soft/cost/oculus/`
+  * copied and expanded into `??????/dist/ovr_sdk_mobile_1.0.3`
+
+-------------------------
+### 2016.09.17 c4augustus
+
+__11:00: installed Oculus mobile SDK examples to c4a Note 5__
+  * plugged c4a Note 5 via USB into MacBook Pro
+  * cd `??????/dist/ovr_sdk_mobile_1.0.3`
+  * `./install_to_phone.py`
+~~~
+Executing: adb install -r ./CinemaSDK.apk
+* daemon not running. starting it now on port 5037 *
+* daemon started successfully *
+	pkg: /data/local/tmp/CinemaSDK.apk
+Success
+Executing: adb install -r ./Oculus360PhotosSDK.apk
+	pkg: /data/local/tmp/Oculus360PhotosSDK.apk
+Success
+Executing: adb install -r ./Oculus360VideosSDK.apk
+	pkg: /data/local/tmp/Oculus360VideosSDK.apk
+Success
+Executing: adb install -r ./VrCubeWorld_Framework.apk
+	pkg: /data/local/tmp/VrCubeWorld_Framework.apk
+Success
+Executing: adb install -r ./VrCubeWorld_NativeActivity.apk
+	pkg: /data/local/tmp/VrCubeWorld_NativeActivity.apk
+Success
+Executing: adb install -r ./VrCubeWorld_SurfaceView.apk
+	pkg: /data/local/tmp/VrCubeWorld_SurfaceView.apk
+Success
+Executing: adb install -r ./VrScene.apk
+	pkg: /data/local/tmp/VrScene.apk
+Success
+Executing: adb push sdcard_SDK /sdcard/
+~~~
+
+-------------------------
 ### 2016.10.04 c4augustus
 
 __17:00: created cargo/rust project for the library rustvr-core__
@@ -359,7 +507,7 @@ add this to your .cargo/config somewhere:
     replace-with = 'local-registry'
 
     [source.local-registry]
-    local-registry = '/Users/???/u/run/rust/cargo/registry'
+    local-registry = '/Users/?????/u/run/rust/cargo/registry'
 ~~~
   * vim ~/.cargo/config
 ~~~
@@ -368,7 +516,7 @@ registry = 'https://github.com/rust-lang/crates.io-index'
 replace-with = 'local-registry'
 
 [source.local-registry]
-local-registry = '/Users/???/u/run/rust/cargo/registry'
+local-registry = '/Users/?????/u/run/rust/cargo/registry'
 ~~~
   * [https://github.com/alexcrichton/cargo-local-registry/issues/5]
   ..* NOTE that we must disable `replace-with` whenever we need to `cargo update` (https://github.com/alexcrichton/cargo-local-registry/issues/5)
