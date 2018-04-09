@@ -523,5 +523,127 @@ local-registry = '/Users/?????/u/run/rust/cargo/registry'
   * `cargo build`
   * `cargo run --example cube`
 
+-------------------------
+### 2018.04.09 c4augustus
+
+__15:00: updated rustvr-gl-gfx to new gfx v0.17__
+  * `cd ~/v/dev/copyleft/rustvr/repo/rustvr-gl-gfx`
+  * vim ~/.cargo/config
+~~~
+#replace-with = 'local-registry'
+~~~
+  * `cargo update`
+  * `cargo local-registry --sync Cargo.lock ~/u/run/rust/cargo/registry`
+~~~
+ Downloading cocoa v0.13.0
+ Downloading gfx v0.17.1
+ Downloading glutin v0.12.2
+ Downloading core-foundation-sys v0.4.6
+ Downloading gfx_app v0.6.0
+ Downloading gfx_device_dx11 v0.7.0
+ Downloading core-foundation v0.4.6
+ Downloading winit v0.10.0
+ Downloading gfx_device_gl v0.15.2
+ Downloading core-graphics v0.12.4
+ Downloading gfx_core v0.8.2
+ Downloading gfx_macros v0.2.1
+ Downloading gfx_window_glutin v0.20.0
+ Downloading gfx_window_dxgi v0.11.0
+ Downloading gl_generator v0.8.0
+add this to your .cargo/config somewhere:
+
+    [source.crates-io]
+    registry = 'https://github.com/rust-lang/crates.io-index'
+    replace-with = 'local-registry'
+
+    [source.local-registry]
+    local-registry = '/Users/admin/u/run/rust/cargo/registry'
+~~~
+  * vim ~/.cargo/config
+~~~
+replace-with = 'local-registry'
+~~~
+
+__16:30: update origin github rustvr/gfx to upstream gfx-rs/gfx__
+  * `cd ~/v/dev/copyleft/rustvr/repo/gfx`
+  * `git remote set-url origin https://github.com/rustvr/gfx.git`
+  * `git remote add upstream https://github.com/gfx-rs/gfx.git`
+  * `git remote -v`
+~~~
+origin	https://github.com/rustvr/gfx.git (fetch)
+origin	https://github.com/rustvr/gfx.git (push)
+upstream	https://github.com/gfx-rs/gfx.git (fetch)
+upstream	https://github.com/gfx-rs/gfx.git (push)
+~~~
+  * `git fetch`
+~~~
+From https://github.com/rustvr/gfx
+ + 2e482755b...12de9eb1b auto       -> origin/auto  (forced update)
+ + 7a3746885...3f7905173 master     -> origin/master  (forced update)
+~~~
+  * `git remote prune origin`
+~~~
+Pruning origin
+URL: https://github.com/rustvr/gfx.git
+ * [pruned] origin/kvark-travis
+ * [pruned] origin/pre-ll
+ * [pruned] origin/staging
+ * [pruned] origin/trying
+ * [pruned] origin/v0.16
+ * [pruned] origin/v0.17
+~~~
+  * `git push -u origin head`
+~~~
+Counting objects: 1784, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (735/735), done.
+Writing objects: 100% (1784/1784), 444.26 KiB | 24.68 MiB/s, done.
+Total 1784 (delta 1154), reused 1636 (delta 1029)
+remote: Resolving deltas: 100% (1154/1154), completed with 135 local objects.
+To https://github.com/rustvr/gfx.git
+ * [new branch]          head -> v0.17
+Branch v0.17 set up to track remote branch v0.17 from origin.
+~~~
+  * `git checkout master`
+~~~
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1023 commits.
+  (use "git push" to publish your local commits)
+~~~
+  * `git push`
+~~~
+Counting objects: 11434, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3614/3614), done.
+Writing objects: 100% (11434/11434), 3.30 MiB | 320.00 KiB/s, done.
+Total 11434 (delta 7672), reused 11214 (delta 7520)
+remote: Resolving deltas: 100% (7672/7672), completed with 89 local objects.
+To https://github.com/rustvr/gfx.git
+   3f7905173..7a3746885  master -> master
+~~~
+  * `git branch --all`
+~~~
+* master
+  v0.12
+  v0.17
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/auto
+  remotes/origin/gh-pages
+  remotes/origin/master
+  remotes/origin/v0.10
+  remotes/origin/v0.11
+  remotes/origin/v0.12
+  remotes/origin/v0.12-dxgi
+  remotes/origin/v0.13
+  remotes/origin/v0.14
+  remotes/origin/v0.14-vk
+  remotes/origin/v0.15
+  remotes/origin/v0.17
+  remotes/origin/v0.7
+  remotes/origin/v0.8
+  remotes/origin/v0.9
+~~~
+  * `git checkout v0.17`
+
 -----------------
 ### (end of file)
