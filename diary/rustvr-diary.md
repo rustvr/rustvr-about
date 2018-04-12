@@ -645,5 +645,21 @@ To https://github.com/rustvr/gfx.git
 ~~~
   * `git checkout v0.17`
 
+-------------------------
+### 2018.04.12 c4augustus
+
+__15:20: created github repo rustvr-hi-macos__
+  * firefox: `https://github/organizations/rustvr`
+  * [New Repository]
+  * Repository name: `rustvr-hi-macos`
+  * Description: `Rust VR plugin for its human interface using macOS`
+  * `X` Public (default)
+  * ` ` Initialize this repository with a README
+
+__15:30: pushed local repo rustvr-hi-macos to github__
+  * `cd rustvr/repo/rustvr-hi-macos`
+  * `git remote add origin https://github.com/rustvr/rustvr-hi-macos.git`
+  * `git push -u origin master`
+
 -----------------
 ### (end of file)
